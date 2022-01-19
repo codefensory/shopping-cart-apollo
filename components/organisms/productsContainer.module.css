@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+}
+
+.itemContainer {
+  position: absolute;
+  top: 0;
+}
+
+.disable {
+  opacity: 0;
+  pointer-events: none;
+}

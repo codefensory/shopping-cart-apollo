@@ -1,5 +1,5 @@
 import { InMemoryCache } from "@apollo/client";
-import { products } from "./localstorage"
+import { cartProducts, products } from "./localstorage"
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -8,6 +8,11 @@ const cache = new InMemoryCache({
         products: {
           read() {
             return products();
+          }
+        },
+        cartProducts: {
+          read() {
+            return cartProducts();
           }
         }
       }

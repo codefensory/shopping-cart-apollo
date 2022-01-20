@@ -3,9 +3,9 @@ import MainTemplate from "../templates/mainTemplate";
 
 import { useQuery, gql } from "@apollo/client"
 
-const DEMO_QUERY = gql`
-  query GetProducts {
-    products {
+const QUERY_CART_PRODUCTS = gql`
+  query GetCartProducts {
+    cartProducts {
         id
         name
         price
@@ -14,7 +14,7 @@ const DEMO_QUERY = gql`
 `
 
 const MainPage: FunctionComponent = () => {
-  const { data, loading, error } = useQuery(DEMO_QUERY);
+  const { data } = useQuery(QUERY_CART_PRODUCTS);
 
   const handlerOnSearch = (searchText: string) => {
 
@@ -22,7 +22,7 @@ const MainPage: FunctionComponent = () => {
 
   return (
     <div>
-      <MainTemplate onSearch={handlerOnSearch} />
+      <MainTemplate cartItems={data?.cartProducts} onSearch={handlerOnSearch} />
     </div>
   )
 }

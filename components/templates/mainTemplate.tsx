@@ -8,7 +8,6 @@ type MainTemplateProps = {
 
 const MainTemplate = (props: MainTemplateProps) => {
   const { onSearch } = props;
-
   const [isClear, setIsClear] = useState(true);
 
   const handlerOnChangeIsClear = (isClear: boolean) => {

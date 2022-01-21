@@ -6,14 +6,18 @@ const cache = new InMemoryCache({
     Query: {
       fields: {
         products: {
-          read() {
-            return products();
+          read(_, { variables }) {
+            const name = variables?.name;
+            if (!name || name === "") return [];
+
+            return products().filter((product) =>
+              product.name.toLowerCase().includes(name.toLowerCase()));
           }
         },
         cartProducts: {
           read() {
             return cartProducts();
-          }
+          },
         }
       }
     }

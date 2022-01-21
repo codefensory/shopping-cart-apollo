@@ -1,24 +1,16 @@
-import { KeyboardEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 let oldIsClear = true;
 
 type SearchBarProps = {
   onChangeIsClear?: (isClear: boolean) => void,
-  onSearch?: (searchText: string) => void,
+  onTyping?: (searchText: string) => void,
 }
 
 const SearchBar = (props: SearchBarProps) => {
-  const { onChangeIsClear, onSearch } = props
+  const { onChangeIsClear, onTyping } = props
 
   const [value, setValue] = useState("");
-
-  const handlerOnSearch = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (!onSearch || value === "") return;
-
-    if (e.key === "Enter") {
-      onSearch(value);
-    }
-  }
 
   useEffect(() => {
     const isClear = value === "";
@@ -36,8 +28,13 @@ const SearchBar = (props: SearchBarProps) => {
         type="text"
         placeholder="search"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onKeyDown={handlerOnSearch}
+        onChange={(e) => {
+          const newValue = e.target.value;
+          setValue(newValue);
+          if (onTyping) {
+            onTyping(newValue);
+          }
+        }}
       />
     </div>
   );

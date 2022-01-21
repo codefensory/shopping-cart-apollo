@@ -9,4 +9,4 @@ const productsInitValues: ProductType[] = [{
 }]
 
 export const products = makeVar<ProductType[]>(productsInitValues);
-export const cartProducts = makeVar<ProductType[]>([...productsInitValues]);
+export const cartProducts = makeVar<ProductType[]>([]);

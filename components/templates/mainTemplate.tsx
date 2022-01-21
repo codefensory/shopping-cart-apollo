@@ -4,13 +4,21 @@ import CartAndProductsBox from "../organisms/cartAndProductsBox";
 import SearchBar from "../organisms/searchBar";
 
 type MainTemplateProps = {
-  onSearch: (searchText: string) => void,
+  onTyping: (searchText: string) => void,
   cartItems?: ProductType[],
-  searchItems?: ProductType[],
+  loadingCart?: boolean,
+  searchProducts?: ProductType[],
+  loadingSearch?: boolean,
 }
 
 const MainTemplate = (props: MainTemplateProps) => {
-  const { onSearch, cartItems, searchItems } = props;
+  const {
+    onTyping,
+    cartItems,
+    searchProducts,
+    loadingCart,
+    loadingSearch } = props;
+
   const [isClear, setIsClear] = useState(true);
 
   const handlerOnChangeIsClear = (isClear: boolean) => {
@@ -19,10 +27,13 @@ const MainTemplate = (props: MainTemplateProps) => {
 
   return (
     <div>
-      <SearchBar onChangeIsClear={handlerOnChangeIsClear} onSearch={onSearch} />
+      <SearchBar onChangeIsClear={handlerOnChangeIsClear} onTyping={onTyping} />
+
       <CartAndProductsBox
+        loadingCart={loadingCart}
+        loadingSearch={loadingSearch}
         cartItems={cartItems}
-        searchItems={searchItems}
+        searchProducts={searchProducts}
         isClear={isClear} />
     </div>
   )

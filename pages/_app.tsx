@@ -5,7 +5,7 @@ import cache from "../apollo/cache";
 
 const client = new ApolloClient({
   cache,
-  connectToDevTools: true
+  connectToDevTools: false
 })
 
 function MyApp({ Component, pageProps }: AppProps) {

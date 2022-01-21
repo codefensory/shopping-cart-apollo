@@ -5,24 +5,33 @@ import ProductsContainer from "./productsContainer";
 type CartAndProductsBoxProps = {
   isClear: boolean,
   cartItems?: ProductType[],
-  searchItems?: ProductType[]
+  loadingCart?: boolean,
+  searchProducts?: ProductType[],
+  loadingSearch?: boolean,
 };
 
 const CartAndProductsBox = (props: CartAndProductsBoxProps) => {
-  const { isClear, cartItems, searchItems } = props;
+  const {
+    isClear,
+    cartItems,
+    searchProducts,
+    loadingCart,
+    loadingSearch } = props;
 
   return (
     <div className={styles.container}>
       <ProductsContainer
+        loading={loadingCart}
         items={cartItems ?? []}
         isActive={isClear}
         isCart={true}
-        clearMessage="Your cart is empty" />
+        clearMessage="Cart is empty" />
       <ProductsContainer
-        items={searchItems ?? []}
+        loading={loadingSearch}
+        items={searchProducts ?? []}
         isActive={!isClear}
         isCart={false}
-        clearMessage="Press enter for search" />
+        clearMessage="No Items" />
     </div>
   );
 }

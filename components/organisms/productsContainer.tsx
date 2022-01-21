@@ -7,22 +7,24 @@ type ProductsContainerProps = {
   items: ProductType[],
   isCart?: boolean,
   clearMessage?: string
+  loading?: boolean
 };
 
 const ProductsContainer = (props: ProductsContainerProps) => {
-  const { isActive, items, isCart, clearMessage } = props;
+  const { isActive, items, isCart, clearMessage, loading } = props;
 
   return (
     <div className={`${styles.container}`}>
       <div className={`${!isActive && styles.disable} ${styles.itemContainer}`}>
-        {items.map((item) => (
+        {!loading && items.map((item) => (
           <ProductItem
             key={item.id}
             data={item}
             isCart={isCart} />
         ))}
 
-        {items.length === 0 && <div>{clearMessage}</div>}
+        {items.length === 0 && !loading && <div>{clearMessage}</div>}
+        {loading && <div>Loading</div>}
       </div>
 
     </div>

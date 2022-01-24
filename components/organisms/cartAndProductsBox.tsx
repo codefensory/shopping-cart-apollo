@@ -1,6 +1,6 @@
 import { addCartProduct, decrementCartProductCount, deleteCartProduct, incrementCartProductCount } from "../../apollo/mutations";
 import { ProductType } from "../../types/products";
-import styles from "./cartAndProductsBox.module.css"
+import { CartAndProductsBoxContainer } from "./cartAndProductsBox.style";
 import ProductsContainer from "./productsContainer";
 
 type CartAndProductsBoxProps = {
@@ -12,7 +12,7 @@ type CartAndProductsBoxProps = {
 
 const CartAndProductsBox = (props: CartAndProductsBoxProps) => {
   return (
-    <div className={styles.container}>
+    <CartAndProductsBoxContainer>
       <ProductsContainer
         isCart
         items={props.cartProducts ?? []}
@@ -29,7 +29,7 @@ const CartAndProductsBox = (props: CartAndProductsBoxProps) => {
         isActive={!props.isClear}
         clearMessage="No Items"
         onAddProduct={addCartProduct} />
-    </div>
+    </CartAndProductsBoxContainer>
   );
 }
 

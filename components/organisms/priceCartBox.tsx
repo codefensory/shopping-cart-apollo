@@ -3,6 +3,7 @@ import { ProductType } from "../../types/products";
 import ButtonCompleteOrder from "../atoms/buttonCompleteOrder";
 import DelivetyDate from "../atoms/deliveryDate";
 import PriceWithName from "../atoms/priceWithName";
+import { PriceCartBoxContainer, PriceCartBoxPricesContainer } from "./priceCartBox.style";
 
 type Props = {
   cartProducts?: ProductType[]
@@ -36,18 +37,18 @@ const PriceCartBox = ({ cartProducts }: Props) => {
   }, [cartProducts])
 
   return (
-    <div>
+    <PriceCartBoxContainer>
       <DelivetyDate />
 
-      <div>
+      <PriceCartBoxPricesContainer>
         <PriceWithName name="Products" price={pricesData?.products} />
-        <PriceWithName name="Shipping Cost" price={pricesData?.shippingCost} />
+        <PriceWithName mark name="Shipping Cost" price={pricesData?.shippingCost} />
         <PriceWithName name="Taxes" price={pricesData?.taxes} />
-        <PriceWithName name="total" price={pricesData?.total} />
-      </div>
+        <PriceWithName redPrice name="Total" price={pricesData?.total} />
+      </PriceCartBoxPricesContainer>
 
       <ButtonCompleteOrder totalPrice={pricesData?.total} minPrice={50} />
-    </div>
+    </PriceCartBoxContainer>
   )
 }
 

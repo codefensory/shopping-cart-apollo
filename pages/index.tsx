@@ -4,13 +4,13 @@ import MainPage from '../components/pages/mainPage'
 
 const Home: NextPage = () => {
   return (
-    <>
+    <div>
       <Head>
-        <title>Basic Shopping Card System</title>
+        <title>Basic Shopping Cart System</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainPage />
-    </>
+    </div>
   )
 }
 

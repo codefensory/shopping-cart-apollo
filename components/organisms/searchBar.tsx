@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { SearchBarContainer } from "./searchBar.style";
 
 let oldIsClear = true;
 
@@ -32,13 +33,13 @@ const SearchBar = (props: SearchBarProps) => {
   }, [value])
 
   return (
-    <div>
+    <SearchBarContainer>
       <input
         type="text"
-        placeholder="search"
+        placeholder="Search Products"
         value={value}
         onChange={handlerOnChange} />
-    </div>
+    </SearchBarContainer>
   );
 }
 

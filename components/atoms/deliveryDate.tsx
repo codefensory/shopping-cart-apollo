@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { DeliveryDateContainer } from "./deliveryDate.style";
 
 const Icon = () => (
   <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,10 +25,15 @@ const DelivetyDate = () => useMemo(() => {
   addDay(1);
 
   return (
-    <div>
+    <DeliveryDateContainer>
       <span><Icon /></span>
-      <span>{currentDate.getDate()}/{currentDate.getMonth() + 1}/{currentDate.getFullYear()}</span>
-    </div>
+      <span>
+        Buy now and get it by
+        <span id="date">
+          {currentDate.getDate()}/{currentDate.getMonth() + 1}/{currentDate.getFullYear()}
+        </span>
+      </span>
+    </DeliveryDateContainer>
   )
 }, [])
 

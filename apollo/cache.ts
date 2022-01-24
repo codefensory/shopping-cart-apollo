@@ -20,8 +20,8 @@ const cache = new InMemoryCache({
           },
         }
       }
-    }
+    },
   }
-})
+});
 
 export default cache

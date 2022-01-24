@@ -1,24 +1,17 @@
 import { useState } from "react";
 import { ProductType } from "../../types/products";
 import CartAndProductsBox from "../organisms/cartAndProductsBox";
+import PriceCartBox from "../organisms/priceCartBox";
 import SearchBar from "../organisms/searchBar";
 
 type MainTemplateProps = {
   onTyping: (searchText: string) => void,
-  cartItems?: ProductType[],
-  loadingCart?: boolean,
+  cartProducts?: ProductType[],
   searchProducts?: ProductType[],
-  loadingSearch?: boolean,
+  isSearching: boolean,
 }
 
 const MainTemplate = (props: MainTemplateProps) => {
-  const {
-    onTyping,
-    cartItems,
-    searchProducts,
-    loadingCart,
-    loadingSearch } = props;
-
   const [isClear, setIsClear] = useState(true);
 
   const handlerOnChangeIsClear = (isClear: boolean) => {
@@ -27,14 +20,15 @@ const MainTemplate = (props: MainTemplateProps) => {
 
   return (
     <div>
-      <SearchBar onChangeIsClear={handlerOnChangeIsClear} onTyping={onTyping} />
-
+      <SearchBar
+        onChangeIsClear={handlerOnChangeIsClear}
+        onTyping={props.onTyping} />
       <CartAndProductsBox
-        loadingCart={loadingCart}
-        loadingSearch={loadingSearch}
-        cartItems={cartItems}
-        searchProducts={searchProducts}
+        cartProducts={props.cartProducts}
+        searchProducts={props.searchProducts}
+        isSearching={props.isSearching}
         isClear={isClear} />
+      <PriceCartBox cartProducts={props.cartProducts} />
     </div>
   )
 }

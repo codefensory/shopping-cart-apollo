@@ -1,37 +1,34 @@
+import { addCartProduct, decrementCartProductCount, deleteCartProduct, incrementCartProductCount } from "../../apollo/mutations";
 import { ProductType } from "../../types/products";
 import styles from "./cartAndProductsBox.module.css"
 import ProductsContainer from "./productsContainer";
 
 type CartAndProductsBoxProps = {
   isClear: boolean,
-  cartItems?: ProductType[],
-  loadingCart?: boolean,
+  cartProducts?: ProductType[],
+  isSearching?: boolean,
   searchProducts?: ProductType[],
-  loadingSearch?: boolean,
 };
 
 const CartAndProductsBox = (props: CartAndProductsBoxProps) => {
-  const {
-    isClear,
-    cartItems,
-    searchProducts,
-    loadingCart,
-    loadingSearch } = props;
-
   return (
     <div className={styles.container}>
       <ProductsContainer
-        loading={loadingCart}
-        items={cartItems ?? []}
-        isActive={isClear}
-        isCart={true}
-        clearMessage="Cart is empty" />
+        isCart
+        items={props.cartProducts ?? []}
+        isActive={props.isClear}
+        clearMessage="Cart is empty"
+        onDeleteProduct={deleteCartProduct}
+        onIncrementCounter={incrementCartProductCount}
+        onDecrementCounter={decrementCartProductCount}
+      />
+
       <ProductsContainer
-        loading={loadingSearch}
-        items={searchProducts ?? []}
-        isActive={!isClear}
-        isCart={false}
-        clearMessage="No Items" />
+        loading={props.isSearching}
+        items={props.searchProducts ?? []}
+        isActive={!props.isClear}
+        clearMessage="No Items"
+        onAddProduct={addCartProduct} />
     </div>
   );
 }

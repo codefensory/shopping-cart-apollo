@@ -1,35 +1,17 @@
 import { useState } from "react";
 import MainTemplate from "../templates/mainTemplate";
 
-import { gql, useLazyQuery } from "@apollo/client"
+import { useLazyQuery, useQuery } from "@apollo/client"
+import { QUERY_FIND_PRODUCTS, QUERY_GET_CART } from "../../apollo/queries";
 
-const QUERY_FIND_PRODUCTS = gql`
-  query GetProducts($name: String!) {
-    products(name: $name) @client {
-        id
-        name
-        price
-    }
-  }
-`
-
-let debounceTimeout: NodeJS.Timeout;
-
-const debounce = (fn: (...params: any[]) => void, timeout: number) => {
-  return (useTimeout: boolean, ...params: any[]) => {
-    clearTimeout(debounceTimeout);
-    if (useTimeout) {
-      debounceTimeout = setTimeout(() => fn(...params), timeout);
-    } else {
-      fn(...params);
-    }
-  }
-}
+import debounce from "../../helpers/debounce"
 
 const MainPage = () => {
   const [
     getProducts, { data: searchData, loading: loadingSearch }
   ] = useLazyQuery(QUERY_FIND_PRODUCTS);
+
+  const { data: cartData } = useQuery(QUERY_GET_CART);
 
   const [typing, setTyping] = useState(false);
 
@@ -49,7 +31,8 @@ const MainPage = () => {
     <div>
       <MainTemplate
         searchProducts={searchData?.products}
-        loadingSearch={loadingSearch || typing}
+        cartProducts={cartData?.cartProducts}
+        isSearching={loadingSearch || typing}
         onTyping={handlerOnTyping} />
     </div>
   )

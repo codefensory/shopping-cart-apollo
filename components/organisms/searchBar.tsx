@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 let oldIsClear = true;
 
@@ -11,6 +11,15 @@ const SearchBar = (props: SearchBarProps) => {
   const { onChangeIsClear, onTyping } = props
 
   const [value, setValue] = useState("");
+
+  const handlerOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+
+    if (onTyping) {
+      onTyping(newValue);
+    }
+  }
 
   useEffect(() => {
     const isClear = value === "";
@@ -28,14 +37,7 @@ const SearchBar = (props: SearchBarProps) => {
         type="text"
         placeholder="search"
         value={value}
-        onChange={(e) => {
-          const newValue = e.target.value;
-          setValue(newValue);
-          if (onTyping) {
-            onTyping(newValue);
-          }
-        }}
-      />
+        onChange={handlerOnChange} />
     </div>
   );
 }

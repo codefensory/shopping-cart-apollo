@@ -9,7 +9,7 @@ import Show from "../helpers/Show";
 import OrderCompleteTemplate from "../templates/orderCompleteTemplate";
 import { cartProducts } from "../../apollo/localstorage";
 
-let lastProductID = 1;
+let lastProductID = 0;
 
 const MainPage = () => {
   const [

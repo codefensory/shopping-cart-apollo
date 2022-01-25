@@ -13,15 +13,17 @@ export const ButtonCompleteOrderStyled = styled.button`
 
   transition: background 400ms, border 400ms, color 400ms;
 
-  &:disabled {
-    border-color: #DDDDDD;
-    background: none;
-    color: #C1C1C1; 
-  }
-
   &:hover {
     background: #FF9900;
     border-color: #FF9900;
   }
+
+  &:disabled {
+    border-color: #DDDDDD;
+    background: none;
+    color: #C1C1C1; 
+    cursor: default;
+  }
+
 `
 

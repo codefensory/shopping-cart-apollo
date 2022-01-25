@@ -1,5 +1,19 @@
+import { useState } from "react";
 import { ProductType } from "../../types/products";
 import Show from "../helpers/Show";
+import {
+  HiddeWhenActive,
+  PICircleButton,
+  PICountButtonContainer,
+  PICountContainer,
+  PIDeleteButton,
+  PIName,
+  PIPhotoContainer,
+  PIPrice,
+  PIShowScreen,
+  PITextContainer,
+  ProductItemStyle,
+} from "./productItem.style";
 
 type ProductItemProps = {
   data: ProductType,
@@ -13,40 +27,64 @@ type ProductItemProps = {
 const ProductItem = (props: ProductItemProps) => {
   const data = props.data
 
+  const [isHover, setIsHover] = useState(false);
+
   const handlerClickSendId = (fn?: (id: number) => void) => {
     if (!fn) return;
     fn(data.id);
   }
 
   return (
-    <div>
-      <div>name: {data.name}</div>
-      <div>price: {data.price}</div>
+    <ProductItemStyle>
+      <PIPhotoContainer>
+        <img src={data.image} />
+      </PIPhotoContainer>
 
-      <Show when={props.isCart}>
-        <button
-          disabled={data.count ? data.count <= 1 : false}
-          onClick={() => handlerClickSendId(props.onDecrementCounter)}
-        >
-          -
-        </button>
-        <span>count: {data.count}</span>
-        <button onClick={() => handlerClickSendId(props.onIncrementCounter)} >
-          +
-        </button>
+      <PITextContainer>
+        <PIName>{data.name}</PIName>
+        <PIPrice>${data.price.toFixed(2)}</PIPrice>
+      </PITextContainer>
 
-        <button onClick={() => handlerClickSendId(props.onDeleteProduct)}>
-          Delete
-        </button>
-      </Show>
+      <PIShowScreen enable={isHover} />
 
-      <Show when={!props.isCart}>
-        <button onClick={() => handlerClickSendId(props.onAddProduct)}>
-          Add Cart
-        </button>
-      </Show>
+      <PICountContainer>
+        <Show when={props.isCart}>
 
-    </div>
+          <PIDeleteButton enable={!isHover} onClick={() => handlerClickSendId(props.onDeleteProduct)}>
+            Delete
+          </PIDeleteButton>
+
+          <PICountButtonContainer
+            onPointerEnter={() => setIsHover(true)}
+            onPointerLeave={() => setIsHover(false)}>
+
+            <HiddeWhenActive
+              enable={isHover}
+              disabled={data.count ? data.count <= 1 : false}
+              onClick={() => handlerClickSendId(props.onDecrementCounter)}>
+              -
+            </HiddeWhenActive>
+
+            <div>{data.count}</div>
+
+            <HiddeWhenActive
+              enable={isHover}
+              onClick={() => handlerClickSendId(props.onIncrementCounter)}>
+              +
+            </HiddeWhenActive>
+
+          </PICountButtonContainer>
+
+        </Show>
+
+        <Show when={!props.isCart}>
+          <PICircleButton onClick={() => handlerClickSendId(props.onAddProduct)}>
+            +
+          </PICircleButton>
+        </Show>
+      </PICountContainer>
+
+    </ProductItemStyle>
   )
 }
 

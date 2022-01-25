@@ -24,13 +24,17 @@ const DelivetyDate = () => useMemo(() => {
 
   addDay(1);
 
+  const mouth = currentDate.getMonth() + 1;
+  let year = currentDate.getFullYear().toString();
+  year = `${year[year.length - 2]}${year[year.length - 1]}`;
+
   return (
     <DeliveryDateContainer>
       <span><Icon /></span>
       <span>
         Buy now and get it by
         <span id="date">
-          {currentDate.getDate()}/{currentDate.getMonth() + 1}/{currentDate.getFullYear()}
+          {(mouth >= 10 ? "" : "0") + mouth}/{currentDate.getDate()}/{year}
         </span>
       </span>
     </DeliveryDateContainer>

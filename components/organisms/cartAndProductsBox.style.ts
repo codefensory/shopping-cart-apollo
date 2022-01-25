@@ -7,4 +7,5 @@ export const CartAndProductsBoxContainer = styled.div`
   background: white;
   border-radius: 4px;
   overflow: auto;
+  position: relative;
 `

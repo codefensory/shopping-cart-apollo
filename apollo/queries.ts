@@ -6,6 +6,7 @@ export const QUERY_FIND_PRODUCTS = gql`
         id
         name
         price
+        image
     }
   }
 `
@@ -16,6 +17,7 @@ export const QUERY_GET_CART = gql`
       id
       name
       price
+      image
       count
     }
   }

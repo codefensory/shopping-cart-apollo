@@ -3,7 +3,7 @@ import { ButtonCompleteOrderStyled } from "./buttonCompleteOrder.style"
 type Props = {
   totalPrice: number | undefined;
   minPrice: number;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const ButtonCompleteOrder = ({ totalPrice, minPrice = 100, onClick }: Props) => {

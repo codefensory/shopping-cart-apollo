@@ -7,16 +7,17 @@ import { PriceCartBoxContainer, PriceCartBoxPricesContainer } from "./priceCartB
 
 type Props = {
   cartProducts?: ProductType[]
+  onBuy?: () => void;
 }
 
 type PricesData = {
-  products?: number,
-  taxes?: number,
-  shippingCost?: number,
-  total?: number,
+  products?: number;
+  taxes?: number;
+  shippingCost?: number;
+  total?: number;
 }
 
-const PriceCartBox = ({ cartProducts }: Props) => {
+const PriceCartBox = ({ cartProducts, onBuy }: Props) => {
   const pricesData: PricesData | undefined = useMemo(() => {
     if (!cartProducts) return
 
@@ -47,7 +48,7 @@ const PriceCartBox = ({ cartProducts }: Props) => {
         <PriceWithName redPrice name="Total" price={pricesData?.total} />
       </PriceCartBoxPricesContainer>
 
-      <ButtonCompleteOrder totalPrice={pricesData?.total} minPrice={50} />
+      <ButtonCompleteOrder onClick={onBuy} totalPrice={pricesData?.total} minPrice={50} />
     </PriceCartBoxContainer>
   )
 }

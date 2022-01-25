@@ -6,10 +6,11 @@ import SearchBar from "../organisms/searchBar";
 import { MainTemplateContainer, MidContainer } from "./mainTemplate.style";
 
 type MainTemplateProps = {
-  onTyping: (searchText: string) => void,
-  cartProducts?: ProductType[],
-  searchProducts?: ProductType[],
-  isSearching: boolean,
+  onTyping: (searchText: string) => void;
+  cartProducts?: ProductType[];
+  searchProducts?: ProductType[];
+  isSearching: boolean;
+  onBuy?: () => void;
 }
 
 const MainTemplate = (props: MainTemplateProps) => {
@@ -34,7 +35,7 @@ const MainTemplate = (props: MainTemplateProps) => {
       </MidContainer>
 
       <MidContainer style={{ paddingLeft: "40px" }}>
-        <PriceCartBox cartProducts={props.cartProducts} />
+        <PriceCartBox cartProducts={props.cartProducts} onBuy={props.onBuy} />
       </MidContainer>
 
     </MainTemplateContainer>
